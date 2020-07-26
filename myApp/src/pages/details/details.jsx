@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import Taro from '@tarojs/taro'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { View, Text } from '@tarojs/components'
+import * as detailsActions from './store/widgets';
 // import './index.less'
 
-export default class Details extends Component {
+class Details extends Component {
 
   componentWillMount() {
     console.log('初始化componentWillMount');
   }
-
-
 
   componentDidMount() {
     console.log('首次componentDidMount');
@@ -48,3 +49,12 @@ export default class Details extends Component {
     )
   }
 }
+
+// 将store上的state同步到props上
+const mapStateToProps = state => {
+  return {
+    rows: state.details.rows,
+  };
+};
+
+export default connect(mapStateToProps)(Details);

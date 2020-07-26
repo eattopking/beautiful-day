@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Taro from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
+import * as indexActions from './store/widgets';
 import './index.less'
 
-export default class Index extends Component {
+class Index extends Component {
 
   componentWillMount() {
     console.log('初始化componentWillMount');
@@ -44,3 +47,12 @@ export default class Index extends Component {
     )
   }
 }
+
+// 将store上的state同步到props上
+const mapStateToProps = state => {
+  return {
+    rows: state.index.rows,
+  };
+};
+
+export default connect(mapStateToProps)(Index);

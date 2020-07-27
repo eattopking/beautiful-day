@@ -47,22 +47,35 @@ class Details extends Component {
   }
   // 还有一些特定小程序的事件就不一一列举了， 有兴趣可以自己看看
 
-  // 还有一些特定小程序的事件就不一一列举了， 有兴趣可以自己看看
   handleClick = () => {
     const {
-      data
+      data,
+      detailsData
     } = this.props;
-    this.actions.updateData(data + 1);
+    const {
+      updateData,
+      updateDetailsData
+    } = this.actions;
+    updateData(data + 1);
+    updateDetailsData(detailsData + 1);
   }
 
   render() {
     const {
-      data
+      data,
+      detailsData
     } = this.props;
     return (
       <View className="details">
-        <Text className="details-text">{`详情点击${data}次`}</Text>
-        <Button onClick={this.handleClick}>增加详情点击次数</Button>
+        <Text className="details-text">
+          {`详情点击${detailsData}次`}
+        </Text>
+        <Text className='details-text'>
+          {`所有页面点击共${data}次`}
+        </Text>
+        <Button onClick={this.handleClick}>
+          增加详情点击次数
+        </Button>
       </View>
     );
   }
@@ -70,8 +83,13 @@ class Details extends Component {
 
 // 将store上的state同步到props上
 const mapStateToProps = (state) => {
+  const {
+    data,
+    detailsData
+  } = state.details;
   return {
-    data: state.details.data,
+    data,
+    detailsData,
   };
 };
 

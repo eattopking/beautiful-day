@@ -47,19 +47,29 @@ class Index extends Component {
   // 还有一些特定小程序的事件就不一一列举了， 有兴趣可以自己看看
   handleClick = () => {
     const {
-      data
+      data,
+      indexData
     } = this.props;
-    this.actions.updateData(data + 1);
+    const {
+      updateData,
+      updateIndexData
+    } = this.actions;
+    updateData(data + 1);
+    updateIndexData(indexData + 1);
   }
 
   render () {
     const {
-      data
+      data,
+      indexData
     } = this.props;
     return (
       <View className='index'>
         <Text className='index-text'>
-          {`首页点击${data}次`}
+          {`首页点击${indexData}次`}
+        </Text>
+        <Text className='index-text'>
+          {`所有页面点击共${data}次`}
         </Text>
         <Button onClick={this.handleClick}>
           增加主页点击次数
@@ -71,8 +81,13 @@ class Index extends Component {
 
 // 将store上的state同步到props上
 const mapStateToProps = state => {
+  const {
+    data,
+    indexData
+  } = state.index;
   return {
-    data: state.index.data,
+    data,
+    indexData,
   };
 };
 

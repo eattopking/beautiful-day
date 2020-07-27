@@ -14,27 +14,27 @@ const ALL_DATA = "ALL_DATA";
  * 这个模式下reducer 使用export default 唯一暴露
  */
 const defaultState = {
-  rows: []
+  data: 0
 };
 
 export default (state = defaultState, action) => {
   switch (action.type) {
     case ALL_DATA:
-      return { ...state, rows: action.data };
+      return { ...state, data: action.data };
     default:
       return state;
   }
 };
 
 /**
- * 给表格设置数据
- * @param rows 表格数据
+ * 更新数据
+ * @param data 更新的数据
  */
-export const setAllData = rows => {
+export const updateData = data => {
   return (dispatch) => {
     dispatch({
       type: ALL_DATA,
-      data: rows
+      data
     });
   };
 };

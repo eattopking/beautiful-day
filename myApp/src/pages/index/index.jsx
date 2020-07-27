@@ -2,11 +2,20 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Taro from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View, Text, Button } from '@tarojs/components'
 import * as indexActions from './store/widgets';
 import './index.less'
 
 class Index extends Component {
+
+  constructor(props) {
+    super(props);
+    const {
+      dispatch
+     } = props;
+    // action集合
+    this.actions = bindActionCreators(indexActions, dispatch);
+  }
 
   componentWillMount() {
     console.log('初始化componentWillMount');
@@ -36,13 +45,25 @@ class Index extends Component {
     console.log('程序卸载');
   }
   // 还有一些特定小程序的事件就不一一列举了， 有兴趣可以自己看看
+  handleClick = () => {
+    const {
+      data
+    } = this.props;
+    this.actions.updateData(data + 1);
+  }
 
   render () {
+    const {
+      data
+    } = this.props;
     return (
       <View className='index'>
-        <Text onClick={() => {
-          Taro.navigateTo({ url: '/pages/details/details' })
-        }}>Hello world!</Text>
+        <Text className='index-text'>
+          {`首页点击${data}次`}
+        </Text>
+        <Button onClick={this.handleClick}>
+          增加主页点击次数
+        </Button>
       </View>
     )
   }
@@ -51,7 +72,7 @@ class Index extends Component {
 // 将store上的state同步到props上
 const mapStateToProps = state => {
   return {
-    rows: state.index.rows,
+    data: state.index.data,
   };
 };
 

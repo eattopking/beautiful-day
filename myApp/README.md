@@ -7,6 +7,9 @@
 
 使用Taro开发,最后编译成小程序代码
 
+taro 一开始是依据开发小程序的目的开发的，所以生成的项目目录结构和配置文件和小程序的相似，
+开发其他端的应用的时候， 也是按照这个目录和配置文件结构
+
 # 小程序开发整体步骤
 
 1. 注册小程序
@@ -22,12 +25,24 @@
 
 1. 引入项目根目录
 2. 有小程序id填入小程序id, 没有的调入测试id, 也可以进行调试,但是测试id不能上传代码审核
+3. 微信开发者工具通过解析项目中dist目录中的小程序文件，就行调试和上传代码
 
 # 小程序发布步骤
 
 1. 在微信开发者工具中调试,调试完成后上传代码
 2. 上传代码后在微信公众平台上,进行代码审核
 3. 审核完成后,发布小程序
+
+# taro的主要依赖
+
+1.@tarojs/react：基于 react-reconciler(自定义的react渲染器) 的小程序专用 React 渲染器，连接 @tarojs/runtime 的 DOM 实例，相当于小程序版的react-dom，暴露的 API 也和react-dom保持一致，就是将react处理成小程序能够识别js， 然后taro将所有的打包到dist文件夹中（目前我是这么理解的）
+
+2. @tarojs/taro : 给开发者暴露Taro 的 API
+
+3. @tarojs/components： Taro基础跨平台组件库（适用于小程序和H5的场景）
+
+4. @tarojs/runtime： Taro 运行时,  为了Taro内部提供基础方法， 并在小程序端模仿浏览器实现了，window、navigator、document、Date等对象，并通过 Webpack 的 ProvidePlugin 注入到项目的全局对象
+
 
 
 实现一个简单的小程序例子

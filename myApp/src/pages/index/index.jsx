@@ -2,9 +2,13 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Taro from '@tarojs/taro'
-import { View, Text, Button } from '@tarojs/components'
+import {
+  View,
+  Text,
+  Button
+} from '@tarojs/components'
 import * as indexActions from './store/widgets';
-import './index.less'
+import './index.less';
 
 class Index extends Component {
 
@@ -26,7 +30,7 @@ class Index extends Component {
   }
 
   componentDidMount() {
-    console.log('首次componentDidMount');
+    console.log('首次componentDidMount', window);
   }
 
   componentDidHide () {
@@ -58,24 +62,28 @@ class Index extends Component {
     updateIndexData(indexData + 1);
   }
 
+  handleCreateCtn = () => {
+      const {
+        data,
+        indexData
+      } = this.props;
+      return (
+        <View className='index'>
+          <Text className='index-text'>
+            {`首页点击${indexData}次`}
+          </Text>
+          <Text className='index-text'>
+            {`所有页面点击共${data}次`}
+          </Text>
+          <Button onClick={this.handleClick}>
+            增加主页点击次数
+          </Button>
+        </View>
+      );
+  }
+
   render () {
-    const {
-      data,
-      indexData
-    } = this.props;
-    return (
-      <View className='index'>
-        <Text className='index-text'>
-          {`首页点击${indexData}次`}
-        </Text>
-        <Text className='index-text'>
-          {`所有页面点击共${data}次`}
-        </Text>
-        <Button onClick={this.handleClick}>
-          增加主页点击次数
-        </Button>
-      </View>
-    )
+    return this.handleCreateCtn();
   }
 }
 

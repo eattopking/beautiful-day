@@ -9,7 +9,9 @@ import "./index.less";
 class Details extends Component {
   constructor(props) {
     super(props);
-    const { dispatch } = props;
+    const {
+      dispatch
+    } = props;
     // action集合
     this.actions = bindActionCreators(detailsActions, dispatch);
   }
@@ -58,26 +60,24 @@ class Details extends Component {
     } = this.actions;
     updateData(data + 1);
     updateDetailsData(detailsData + 1);
-  }
+  };
 
-  render() {
+  handleCreateCtn = () => {
     const {
       data,
       detailsData
     } = this.props;
     return (
       <View className="details">
-        <Text className="details-text">
-          {`详情点击${detailsData}次`}
-        </Text>
-        <Text className='details-text'>
-          {`所有页面点击共${data}次`}
-        </Text>
-        <Button onClick={this.handleClick}>
-          增加详情点击次数
-        </Button>
+        <Text className="details-text">{`详情点击${detailsData}次`}</Text>
+        <Text className="details-text">{`所有页面点击共${data}次`}</Text>
+        <Button onClick={this.handleClick}>增加详情点击次数</Button>
       </View>
     );
+  };
+
+  render() {
+    return this.handleCreateCtn();
   }
 }
 

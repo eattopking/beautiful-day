@@ -41,7 +41,7 @@ class Details extends Component {
   }
 
   componentDidCatchError() {
-    console.log("监听报错");
+    console.log("componentDidCatchError监听报错");
   }
 
   componentWillUnmount() {

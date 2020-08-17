@@ -1,5 +1,10 @@
 export default {
-  pages: ["pages/index/index", "pages/details/details"],
+  pages: [
+    "pages/PageDetails/index", 
+    "pages/PageIndex/index",  
+    "pages/index/index", 
+    "pages/details/details"
+  ],
   tabBar: {
     list: [
       {

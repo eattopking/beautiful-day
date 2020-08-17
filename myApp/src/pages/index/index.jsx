@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Taro from '@tarojs/taro'
+import Taro, { 
+  navigateTo
+ } from '@tarojs/taro'
 import {
   View,
   Text,
@@ -13,6 +15,7 @@ import './index.less';
 class Index extends Component {
 
   constructor(props) {
+    console.log(Taro.ENV_TYPE);
     super(props);
     const {
       dispatch
@@ -26,7 +29,7 @@ class Index extends Component {
   }
 
   componentDidShow () {
-    console.log('程序启动，或从后台进入前台显示时触发');
+    console.log('componentDidShow程序启动，或从后台进入前台显示时触发');
   }
 
   componentDidMount() {
@@ -34,19 +37,19 @@ class Index extends Component {
   }
 
   componentDidHide () {
-     console.log('从前台切后台时触发');
+     console.log('componentDidHide从前台切后台时触发');
   }
 
   componentDidNotFound() {
-    console.log('程序要打开的页面不存在时触发');
+    console.log('componentDidNotFound程序要打开的页面不存在时触发');
   }
 
   componentDidCatchError() {
-    console.log('监听报错');
+    console.log('componentDidCatchError监听报错');
   }
 
   componentWillUnmount () {
-    console.log('程序卸载');
+    console.log('componentWillUnmount程序卸载');
   }
   // 还有一些特定小程序的事件就不一一列举了， 有兴趣可以自己看看
   handleClick = () => {
@@ -77,6 +80,13 @@ class Index extends Component {
           </Text>
           <Button onClick={this.handleClick}>
             增加主页点击次数
+          </Button>
+          <Button onClick={() => {
+            navigateTo({
+              url: "../../pages/PageDetails/index"
+            })
+          }}>
+            navigateTo跳到page详情
           </Button>
         </View>
       );

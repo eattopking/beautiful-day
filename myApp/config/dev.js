@@ -1,3 +1,5 @@
+const mocks = require('../mock/index');
+
 module.exports = {
   env: {
     NODE_ENV: '"development"'
@@ -5,5 +7,10 @@ module.exports = {
   defineConstants: {
   },
   mini: {},
+  plugins: [
+		['@tarojs/plugin-mock', {
+			mocks
+		}]
+	],
   h5: {}
 }
